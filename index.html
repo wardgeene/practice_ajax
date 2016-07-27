@@ -3,10 +3,21 @@
 <head>
   <meta charset="utf-8">
   <title>Practice Ajax</title>
+  <script>
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4) {
+        document.getElementById('ajax').innerHTML = xrh.responseText;
+      }
+    };
+
+    xhr.open('GET', 'https://api.hearthstonejson.com/v1/latest/enUS/cards.collectible.json', true);
+    xhr.send();
+
+  </script>
 </head>
 <body>
-
-
-
+  <div id='ajax'></div>
 </body>
 </html>
