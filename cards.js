@@ -2,18 +2,25 @@
 
 var xhr = new XMLHttpRequest();
 
+var standard = ["CORE", "EXPERT1", "BRM", "TGT", "LOE", "OG"]
+var cardsInStandard = 0;
+var cardsNotInStandard = 0;
+
 xhr.onreadystatechange = function() {
   if (xhr.readyState === 4) {
     var cards = JSON.parse(xhr.responseText);
     var statusHTML = '<ul class="cards">';
     for (var i=0; i<cards.length; i++) {
-      if(cards[i].set !== "GVG" || "TGT") {
-        statusHTML += '<li>' + cards[i].name + '</li>';
+      if(standard.includes(cards[i].set)) {
+        statusHTML += '<li>' + cards[i].name + ' ' + cards[i].set + '</li>';
+        cardsInStandard++;
+      } else {
+        cardsNotInStandard++;
       }
     }
     statusHTML += '</ul>';
     document.getElementById('ajax').innerHTML = statusHTML;
-    console.log(cards);
+    console.log(cards, cardsNotInStandard, cardsInStandard);
   } else {
     console.log(xhr.readyState);
   }
