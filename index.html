@@ -8,11 +8,17 @@
 
     xhr.onreadystatechange = function() {
       if (xhr.readyState === 4) {
-        document.getElementById('ajax').innerHTML = xrh.responseText;
+        var cards = JSON.parse(xhr.responseText);
+        var statusHTML = '<ul class="cards">';
+        for (var i=0; i<cards.length; i++) {
+          statusHTML += '<li>' + cards[i].name + '</li>';
+        }
+        statusHTML += '</ul>';
+        document.getElementById('ajax').innerHTML = statusHTML;
       }
     };
 
-    xhr.open('GET', 'https://api.hearthstonejson.com/v1/latest/enUS/cards.collectible.json', true);
+    xhr.open('GET', 'https://api.hearthstonejson.com/v1/latest/enUS/cards.collectible.json');
     xhr.send();
 
   </script>
